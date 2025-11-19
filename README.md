@@ -1,8 +1,8 @@
-# Professor Playtime Quiz Factory 🤖🚀
+# Professor Passkey
 
 A full-stack web application that generates interactive quizzes from PDF documents using Google's Gemini AI.
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 professor-playtime/
@@ -18,7 +18,7 @@ professor-playtime/
     └── migration.sql       # Database schema
 ```
 
-## 🚀 Setup Instructions
+## Setup Instructions
 
 ### 1. Frontend Setup
 
@@ -72,7 +72,7 @@ professor-playtime/
    - Go to Authentication → Settings
    - Enable "Anonymous sign-ins"
 
-## 🌐 Deployment
+## Deployment
 
 ### Frontend (Vercel/Netlify)
 
@@ -99,7 +99,7 @@ professor-playtime/
    CORS(app, origins=["https://your-frontend.vercel.app"])
    ```
 
-## 🔑 Getting API Keys
+## Getting API Keys
 
 ### Gemini API Key
 1. Go to [Google AI Studio](https://aistudio.google.com)
@@ -113,16 +113,16 @@ professor-playtime/
 3. Copy Project URL and anon public key
 4. Add to `app.js`
 
-## 📊 Features
+## Features
 
-- ✨ Upload PDF lessons
-- 🤖 AI-generated quizzes (3 questions)
-- 🎯 Multiple-choice format
-- 📈 Progress tracking
-- 🔐 Anonymous authentication
-- 💾 Persistent data storage
+- Upload PDF lessons
+- AI-generated quizzes (3 questions)
+- Multiple-choice format
+- Progress tracking
+- Anonymous authentication
+- Persistent data storage
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 - **Frontend**: HTML, JavaScript, Tailwind CSS
 - **Backend**: Python, Flask
@@ -130,7 +130,7 @@ professor-playtime/
 - **Database**: Supabase (PostgreSQL)
 - **Auth**: Supabase Anonymous Auth
 
-## 📝 Environment Variables
+## Environment Variables
 
 ### Backend (.env)
 ```
@@ -144,7 +144,7 @@ SUPABASE_ANON_KEY=your_supabase_anon_key
 BACKEND_URL=your_backend_url
 ```
 
-## 🐛 Troubleshooting
+## Troubleshooting
 
 ### CORS Errors
 - Make sure Flask-CORS is installed
@@ -160,10 +160,10 @@ BACKEND_URL=your_backend_url
 - Check RLS policies are enabled
 - Enable anonymous sign-ins in Supabase
 
-## 📄 License
+## License
 
 MIT License - feel free to use for educational purposes!
 
-## 🤝 Contributing
+## Contributing
 
 Pull requests welcome! Please test thoroughly before submitting.
