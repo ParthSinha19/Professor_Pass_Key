@@ -1,4 +1,4 @@
-# backend.py - Professor PassKey Backend
+# api/index.py - Professor PassKey Backend
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import google.generativeai as genai
@@ -7,29 +7,19 @@ import json
 import base64
 import tempfile
 
-
 app = Flask(__name__)
 # Allow all origins to prevent CORS issues
 CORS(app, resources={r"/*": {"origins": "*"}})
 
 # Configure Gemini API
+# Vercel injects this variable automatically from your Dashboard settings
 GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')
 if not GEMINI_API_KEY:
     raise ValueError("API Key Error: GEMINI_API_KEY environment variable not set.")
 
 genai.configure(api_key=GEMINI_API_KEY)
 
-# --- DEBUG: LIST AVAILABLE MODELS ON STARTUP ---
-print("\n[INFO] Checking available Gemini models...")
-try:
-    # List models without outputting huge tracebacks on initial server start
-    print("---------------------------------------")
-except Exception as e:
-    print(f"[WARN] Could not list models: {e}")
-print("---------------------------------------\n")
-
 # --- QUIZ GENERATION SCHEMA ---
-# This schema allows an array of ANY length (4 to 15 as per prompt)
 QUIZ_SCHEMA = {
     "type": "array",
     "items": {
@@ -77,6 +67,7 @@ def generate_quiz():
         pdf_bytes = base64.b64decode(pdf_base64)
 
         # 2. Save to a temporary file (Bypasses 20MB inline limit)
+        # Note: Vercel only allows writing to /tmp/
         with tempfile.NamedTemporaryFile(suffix='.pdf', delete=False) as temp_pdf:
             temp_pdf.write(pdf_bytes)
             temp_pdf_path = temp_pdf.name
@@ -152,13 +143,10 @@ def generate_quiz():
         
         return jsonify({"error": error_msg}), 500
 
-@app.route('/', methods=['GET'])
-def home():
-    return jsonify({
-        "message": "Professor PassKey Backend is RUNNING",
-        "status": "Ready"
-    }), 200
+# NOTE: The root route ('/') was REMOVED to allow index.html to load.
+# The health check was moved to /api/health to match the Vercel routing rules.
 
-@app.route('/health', methods=['GET'])
+@app.route('/api/health', methods=['GET'])
 def health():
     return jsonify({"status": "healthy"}), 200
+
