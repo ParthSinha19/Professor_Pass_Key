@@ -1,8 +1,16 @@
 # Environment files
 .env
+.env.*.local
+
+# IDE Settings (Visible in your structure)
+.vscode/
 
 # Python specific files
 venv/
 __pycache__/
 *.pyc
 *.log
+
+# Supabase Local Development Artifacts (Recommended for cleanliness)
+supabase/.temp/
+supabase/.branches/

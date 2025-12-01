@@ -6,10 +6,7 @@ import os
 import json
 import base64
 import tempfile
-from dotenv import load_dotenv
 
-# Load environment variables
-load_dotenv()
 
 app = Flask(__name__)
 # Allow all origins to prevent CORS issues
@@ -165,7 +162,3 @@ def home():
 @app.route('/health', methods=['GET'])
 def health():
     return jsonify({"status": "healthy"}), 200
-
-if __name__ == '__main__':
-    print("[INFO] Professor PassKey Backend Starting...")
-    app.run(debug=True, host='127.0.0.1', port=5000)

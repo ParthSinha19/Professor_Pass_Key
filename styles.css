@@ -1,0 +1,253 @@
+/*
+ * Professional UI Styles for AI Knowledge Generator
+ */
+
+/* --- THEME VARIABLES --- */
+:root {
+    /* Base colors - Indigo 600 */
+    --color-primary: #4f46e5;
+    --color-primary-hover: #4338ca;
+    --color-indigo-100: #e0e7ff;
+    --color-indigo-200: #c7d2fe;
+}
+
+/* Light Mode Defaults */
+.theme-light {
+    --bg-color: #172628;            /* Main Background  */
+    --card-bg: white;               /* Card Background */
+    --card-border: #e5e7eb;         /* Card Border (Gray 200) */
+    --text-header: #1f3737;         /* Heading Text (Gray 800) */
+    --text-main: #374151;           /* Main Text (Gray 600) */
+    --text-sub: #6b7280;            /* Sub Text (Gray 500) */
+    --progress-bg: #f9fafb;         /* Progress Container BG */
+    --progress-border: #f3f4f6;     /* Progress Container Border */
+    --option-bg: #f9fafb;           /* Option Button Background */
+    --option-border: #d1d5db;       /* Option Button Border */
+}
+
+/* Dark Mode Overrides */
+.theme-dark {
+    --bg-color: #121212;            /* Main Background (Very Dark Gray) */
+    --card-bg: #1e1e1e;             /* Card Background */
+    --card-border: #374151;         /* Card Border (Gray 700) */
+    --text-header: #f3f4f6;         /* Heading Text (Gray 100) */
+    --text-main: #d1d5db;           /* Main Text (Gray 400) */
+    --text-sub: #9ca3af;            /* Sub Text (Gray 500) */
+    --progress-bg: #2d2d2d;         /* Progress Container BG */
+    --progress-border: #374151;     /* Progress Container Border */
+    --option-bg: #2d2d2d;           /* Option Button Background */
+    --option-border: #4b5563;       /* Option Button Border */
+}
+
+/* --- BASE STYLES --- */
+body {
+    background-color: var(--bg-color);
+}
+
+/* Map CSS variables to classes for dynamic theming */
+.header-text { color: var(--text-header); }
+.sub-text { color: var(--text-main); }
+.sub-text-sm { color: var(--text-sub); }
+.card-bg { background-color: var(--card-bg); }
+.card-border { border-color: var(--card-border); }
+.progress-bg { background-color: var(--progress-bg); }
+.progress-border { border-color: var(--progress-border); }
+.user-id-bg { background-color: var(--progress-bg); }
+.user-id-text { color: var(--text-sub); }
+.loading-text { color: var(--text-main); }
+.history-link { color: var(--text-sub); }
+.history-link:hover { color: var(--color-primary); }
+
+
+/* --- Primary Button Style (for active actions) --- */
+.btn-primary {
+    background-color: var(--color-primary);
+    color: white;
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
+}
+
+.btn-primary:hover:not(:disabled) {
+    background-color: var(--color-primary-hover);
+    box-shadow: 0 10px 15px -3px rgba(79, 70, 229, 0.2), 0 4px 6px -4px rgba(79, 70, 229, 0.1);
+    transform: translateY(-1px);
+}
+
+.btn-primary:disabled {
+    background-color: #a5b4fc; 
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+/* --- Secondary Button Style (for major functions) --- */
+.btn-secondary {
+    background-color: var(--color-indigo-100); 
+    color: var(--color-primary); 
+    font-weight: 600;
+    font-size: 1.125rem;
+    padding: 0.875rem 1.75rem;
+    border-radius: 0.75rem; 
+    border: 1px solid var(--color-indigo-200); 
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+}
+
+.theme-dark .btn-secondary {
+    background-color: #374151; /* Darker background for dark mode secondary */
+    color: var(--color-primary);
+    border: 1px solid #4b5563;
+}
+
+.btn-secondary:hover:not(:disabled) {
+    background-color: var(--color-indigo-200); 
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+
+/* --- Quiz Option Buttons --- */
+.option-btn {
+    background: var(--option-bg);
+    border: 1px solid var(--option-border);
+    color: var(--text-main); 
+    font-weight: 500;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: left;
+    width: 100%;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.option-btn:hover:not(.correct):not(.incorrect) {
+    border-color: var(--color-primary); 
+    background: var(--progress-bg); 
+}
+
+/* Correct/Incorrect feedback colors */
+.option-btn.correct {
+    background-color: #d1fae5; 
+    border-color: #10b981; 
+    color: #065f46; 
+    box-shadow: 0 0 10px rgba(16, 185, 129, 0.3);
+    pointer-events: none;
+}
+
+.option-btn.incorrect {
+    background-color: #fee2e2; 
+    border-color: #ef4444; 
+    color: #991b1b; 
+    box-shadow: 0 0 10px rgba(239, 68, 68, 0.3);
+    pointer-events: none;
+}
+
+.theme-dark .option-btn.correct {
+    background-color: #053b28; /* Dark green */
+    color: #34d399; /* Light green text */
+    border-color: #047857;
+}
+.theme-dark .option-btn.incorrect {
+    background-color: #450a0a; /* Dark red */
+    color: #f87171; /* Light red text */
+    border-color: #991b1b;
+}
+
+
+/* Feedback blocks */
+.feedback-correct {
+    background: #f0fdf4;
+    border-left: 4px solid #10b981;
+    color: #065f46;
+}
+.theme-dark .feedback-correct {
+    background: #064e3b; /* Dark green feedback */
+    color: #34d399;
+}
+
+.feedback-incorrect {
+    background: #fef2f2; 
+    border-left: 4px solid #ef4444;
+    color: #991b1b;
+}
+.theme-dark .feedback-incorrect {
+    background: #7f1d1d; /* Dark red feedback */
+    color: #fca5a5;
+}
+
+
+/* --- Custom Spinners (YouTube/Google style) --- */
+
+/* Standard Loading Screen Spinner (Dot Flow) */
+.spinner-dot-flow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    height: 3rem;
+}
+
+.spinner-dot-flow .dot {
+    width: 0.75rem;
+    height: 0.75rem;
+    background-color: var(--color-primary);
+    border-radius: 50%;
+    animation: bounce 1.4s infinite ease-in-out both;
+}
+
+.spinner-dot-flow .dot-2 {
+    animation-delay: -0.32s;
+}
+
+.spinner-dot-flow .dot-3 {
+    animation-delay: -0.16s;
+}
+
+@keyframes bounce {
+    0%, 80%, 100% { transform: scale(0); }
+    40% { transform: scale(1.0); }
+}
+
+/* Small Button Spinner (Border Style) */
+.spinner-border-sm {
+    width: 1.25rem;
+    height: 1.25rem;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Custom styling for the range input */
+.range-lg::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    cursor: pointer;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.15s ease-in-out;
+}
+
+.range-lg::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    cursor: pointer;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    border: none;
+}
