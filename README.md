@@ -1,8 +1,8 @@
-# Professor PassKey
+# Professor Passkey
 
 A professional, **AI-powered tool** that automatically generates multiple-choice quizzes from **PDF documents**. It features a modern, fully responsive UI, secure user authentication, customizable quiz difficulty, and comprehensive progress tracking with downloadable PDF feedback reports.
 
-## Features
+## Project Structure
 
 * **Document to Quiz:** Upload any PDF (lectures, research papers, notes) and instantly get a **tailored multiple-choice quiz**.
 * **AI-Powered:** Utilizes **Google's Gemini 2.0 Flash** model for fast, accurate, and context-aware question generation.
@@ -59,7 +59,121 @@ venv\Scripts\activate
 source venv/bin/activate
 ```
 
-### 3. Install the required packages
+## Setup Instructions
+
+### 1. Frontend Setup
+
+1. **Update Supabase Configuration** in `app.js`:
+   ```javascript
+   const SUPABASE_URL = 'https://your-project.supabase.co';
+   const SUPABASE_ANON_KEY = 'your-anon-key';
+   ```
+
+2. **Update Backend URL** in `app.js`:
+   ```javascript
+   const BACKEND_URL = 'http://localhost:5000';  // Local development
+   // Or: 'https://your-backend.onrender.com'  // Production
+   ```
+
+### 2. Backend Setup
+
+1. **Install Python dependencies**:
+   ```bash
+   cd backend
+   pip install -r requirements.txt
+   ```
+
+2. **Create `.env` file**:
+   ```bash
+   cp .env.example .env
+   ```
+
+   Edit `.env` and add your Gemini API key:
+   ```
+   GEMINI_API_KEY=your_actual_gemini_api_key
+   ```
+
+3. **Run the backend**:
+   ```bash
+   python backend.py
+   ```
+
+   The server will start on `http://localhost:5000`
+
+### 3. Supabase Setup
+
+1. **Create a Supabase project** at [supabase.com](https://supabase.com)
+
+2. **Run the migration**:
+   - Go to SQL Editor in Supabase Dashboard
+   - Copy and paste the contents of `supabase_migration.sql`
+   - Run the query
+
+3. **Enable Anonymous Auth**:
+   - Go to Authentication → Settings
+   - Enable "Anonymous sign-ins"
+
+## Deployment
+
+### Frontend (Vercel/Netlify)
+
+1. **Push your frontend files to GitHub**
+
+2. **Deploy to Vercel**:
+   - Connect your GitHub repo
+   - Set root directory to `frontend/`
+   - Deploy!
+
+3. **Update `BACKEND_URL` in `app.js`** to your production backend URL
+
+### Backend (Render/Fly.io)
+
+1. **Deploy to Render**:
+   - Create a new Web Service
+   - Connect your GitHub repo
+   - Set root directory to `backend/`
+   - Add environment variable: `GEMINI_API_KEY`
+   - Deploy!
+
+2. **Update CORS** in `backend.py` if needed:
+   ```python
+   CORS(app, origins=["https://your-frontend.vercel.app"])
+   ```
+
+## Getting API Keys
+
+### Gemini API Key
+1. Go to [Google AI Studio](https://aistudio.google.com)
+2. Click "Get API key"
+3. Create API key in new project
+4. Copy and save in `.env` file
+
+### Supabase Keys
+1. Go to your Supabase project settings
+2. Navigate to API settings
+3. Copy Project URL and anon public key
+4. Add to `app.js`
+
+## Features
+
+- Upload PDF lessons
+- AI-generated quizzes (3 questions)
+- Multiple-choice format
+- Progress tracking
+- Anonymous authentication
+- Persistent data storage
+
+## Tech Stack
+
+- **Frontend**: HTML, JavaScript, Tailwind CSS
+- **Backend**: Python, Flask
+- **AI**: Google Gemini API
+- **Database**: Supabase (PostgreSQL)
+- **Auth**: Supabase Anonymous Auth
+
+## Environment Variables
+
+### Backend (.env)
 ```
 pip install -r requirements.txt
 ```
@@ -70,7 +184,7 @@ pip install -r requirements.txt
 GEMINI_API_KEY=your_actual_api_key_here
 ```
 
-### 5. Start the server
+## Troubleshooting
 
 ### 1. Run the Flask application
 ```
@@ -87,7 +201,7 @@ const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
 ### 3.Database setup
 ## 1. Go to your Supabase Project dashboard.
 
-## 2. Navigate to the SQL Editor.
+## License
 
 ## 3. Run the following SQL script to create the quiz_progress table and set up Row-Level Security (RLS) policies:
 ```
@@ -100,7 +214,7 @@ create table public.quiz_progress (
   timestamp timestamp with time zone default timezone('utc'::text, now()) not null
 );
 
-alter table public.quiz_progress enable row level security;
+## Contributing
 
 create policy "Users can view their own progress" on public.quiz_progress for select using (auth.uid() = user_id);
 create policy "Users can insert their own progress" on public.quiz_progress for insert with check (auth.uid() = user_id);
