@@ -1,7 +1,7 @@
 // AI Document Analyst - Frontend
 const SUPABASE_URL = 'https://msziqggzrsjowfettyem.supabase.co';  
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1zemlxZ2d6cnNqb3dmZXR0eWVtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQ2MTMzMDMsImV4cCI6MjA4MDE4OTMwM30.YyQNF132u_mN7uLkjtRGYWls-rPBUSrAIUWQQTLVFh8';  
-const BACKEND_URL = '';
+const BACKEND_URL = 'https://professor-pass-key.vercel.app';
 
 const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
